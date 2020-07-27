@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>API Documentation</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.1/examples/cover/">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- Custom styles for this template -->
+  </head>
+
+  <body>
+
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner">
+            <h3 class="masthead-brand">API Documentation</h3>
+            <h4 class="masthead-brand">Base URL: /api</h3>
+        </div>
+      </header>
+
+      <main role="main" class="inner cover">
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Endpoint</th>
+                <th scope="col">Method</th>
+                <th scope="col">Content type</th>
+                <th scope="col">Description</th>
+                <th scope="col">Request</th>
+                <th scope="col">Response</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">/currency</th>
+                <td>GET</td>
+                <td>application/json</td>
+                <td>List available currencies with conversion rates</td>
+                <td></td>
+                <td>
+                    Available currencies in json format.
+                    <br/>
+                    <br/>
+                    Example:
+                    <br/>
+                    <br/>
+
+<pre>
+{
+    "fty":{
+        "fty":1,
+        "xdt":2.5,
+        "cdt":0.2
+    },
+    "xdt":{
+        "fty":0.4,
+        "xdt":1,
+        "cdt":1
+    },
+    "cdt":{
+        "fty":5,
+        "xdt":1,
+        "cdt":1
+    }
+}
+<pre>
+                </td>
+                </tr>
+              <tr>
+                <th scope="row">/wallets</th>
+                <td>GET</td>
+                <td>application/json</td>
+                <td>Get all wallets</td>
+                <td></td>
+                <td>
+                    Wallets in json format.
+                    <br/>
+                    <br/>
+                    Example:
+                    <br/>
+                    <br/>
+
+<pre>
+[
+    {
+        "id":"test2",
+        "address":"ad0234829205b9033196ba818f7a872b",
+        "balance":2500.0,
+        "currency":"xdt",
+        "tags":[]
+    },
+    {
+        "id":"main",
+        "address":"fad58de7366495db4650cfefac2fcd61",
+        "balance":97500.0,
+        "currency":"fty",
+        "tags":[]
+    }
+]
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">/wallets</th>
+                <td>POST</td>
+                <td>application/json</td>
+                <td>Create a wallet</td>
+                <td>
+                    Wallet details as id, currency and tags (as a list of strings):
+                    <br/>
+                    <br/>
+<pre>
+{
+    "id":"test2",
+    "currency":"cdt",
+    "tags":[]
+}
+</pre>
+                </td>
+                <td>
+                    Created wallet information:
+                    <br>
+                    <br>
+<pre>
+{
+    "id":"test22",
+    "address":"4d42bf9c18cb04139f918ff0ae68f8a0",
+    "balance":0.0,
+    "currency":"xdt",
+    "tags":[]
+}
+</pre>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">/wallets/:id</th>
+                <td>POST</td>
+                <td>application/json</td>
+                <td>Get wallet details</td>
+                <td>
+                </td>
+                <td>
+                    Wallet details of given id:
+                    <br/>
+                    GET /wallets/test2
+                    <br/>
+                    <br/>
+<pre>
+{
+    "id":"test2",
+    "address":"4d42bf9c18cb04139f918ff0ae68f8a0",
+    "balance":100.0,
+    "currency":"xdt",
+    "tags":[]
+}
+</pre>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">/wallets/:id</th>
+                <td>DELETE</td>
+                <td></td>
+                <td>Delete a wallet</td>
+                <td>
+                </td>
+                <td></td>
+              </tr>
+              <tr>
+                <th scope="row">/transfer</th>
+                <td>POST</td>
+                <td>application/json</td>
+                <td>Transfer funds between wallets</td>
+                <td>
+                    Sender and receiver addresses and the amount of funds to be transferred (in sender currency).
+                    <br/>
+                    Conversions are done automatically according to the conversion rates.
+                    <br/>
+                    <br/>
+<pre>
+{
+    "sender":"fad58de7366495db4650cfefac2fcd61",
+    "receiver":"ad0234829205b9033196ba818f7a872b",
+    "amount":200
+}
+</pre>
+                </td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+
+
+<hr/>
+
+<div>
+    <h4>Handling failure</h4>
+    For all endpoints, in case of failed requests (e.g. 404, 400), a json payload is returned with the status code and the error message:
+    <br/>
+    For example, creating a wallet with the same id of an existing wallet:
+    <br/>
+    <br/>
+<pre>
+{
+    "status": 400,
+    "message": "a wallet with the same of \'test22\' already exists"
+}
+</pre>
+<br/>
+<br/>
+
+</div>
+      </main>
+
+      <footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+        </div>
+      </footer>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
