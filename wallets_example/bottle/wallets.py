@@ -2,7 +2,13 @@ from bottle import Bottle, request, response
 
 from jumpscale.loader import j
 from jumpscale.core.base import DuplicateError
-from jumpscale.packages.wallets_example.bottle import CONVERSION_TABLE, Currency, wallets
+
+
+current_full_path = os.path.dirname(os.path.abspath(__file__))
+package_path = current_full_path.rpartition("wallet_example")[0]
+sys.path.append(package_path)
+
+from wallets_example.bottle import CONVERSION_TABLE, Currency, wallets
 
 app = Bottle()
 
