@@ -110,6 +110,9 @@ def create():
 @app.delete(f"{WALLETS_BASE_URL}/<wallet_id>")
 @enable_cors
 def delete(wallet_id):
+    if wallet_id == "main":
+        return format_error(400, f"cannot delete the main wallet")
+
     try:
         wallets.delete(wallet_id)
     except:
