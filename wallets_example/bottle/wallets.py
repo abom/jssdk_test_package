@@ -88,6 +88,11 @@ def options_for_delete():
     pass
 
 
+@app.route(f"{BASE_URL}/transfer", method="options")
+@enable_cors
+def options_for_transfer():
+    pass
+
 @app.post(WALLETS_BASE_URL)
 @serialize
 @enable_cors
