@@ -76,7 +76,19 @@ def get(wallet_id):
     return wallet.to_dict()
 
 
-@app.post(f"{WALLETS_BASE_URL}")
+@app.route(WALLETS_BASE_URL, method="options")
+@enable_cors
+def options_for_create():
+    pass
+
+
+@app.route(f"{WALLETS_BASE_URL}/<wallet_id>", method="options")
+@enable_cors
+def options_for_delete():
+    pass
+
+
+@app.post(WALLETS_BASE_URL)
 @serialize
 @enable_cors
 def create():
