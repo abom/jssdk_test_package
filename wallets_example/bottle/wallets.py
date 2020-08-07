@@ -146,7 +146,7 @@ def get_currencies():
 def get_by_address(address):
     _, count, result = wallets.find_many(address=address)
     if count:
-        return next(result)
+        return wallets.find(next(result).id)
 
 
 @app.post(f"{BASE_URL}/transfer")
