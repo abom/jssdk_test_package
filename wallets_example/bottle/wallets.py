@@ -47,7 +47,7 @@ def enable_cors(fn):
         response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, OPTIONS, DELETE"
         response.headers[
             "Access-Control-Allow-Headers"
-        ] = "Origin, Accept, Content-Type, X-Requested-With, X-CSRF-Token"
+        ] = "Access-Control-Allow-Origin, Origin, Accept, Content-Type, X-Requested-With, X-CSRF-Token"
 
         if request.method != "OPTIONS":
             # actual request; reply with the actual response
