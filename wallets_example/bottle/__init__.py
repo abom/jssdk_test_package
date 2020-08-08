@@ -42,7 +42,7 @@ class Wallet(Base):
     address = fields.String()
     balance = fields.Float()
     currency = fields.Enum(Currency)
-    tags = fields.List(fields.String)
+    tags = fields.List(fields.String())
 
 
 wallets = StoredFactory(Wallet)
