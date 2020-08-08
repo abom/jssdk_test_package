@@ -51,7 +51,10 @@ def enable_cors(fn):
 
         if request.method != "OPTIONS":
             # actual request; reply with the actual response
-            return fn(*args, **kwargs)
+            try:
+                return fn(*args, **kwargs)
+            except:
+                return format_error(500, "unhandled internal error, please contact support")
 
     return _enable_cors
 
